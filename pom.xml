@@ -4,7 +4,7 @@
 
     <groupId>com.statful.client.framework</groupId>
     <artifactId>statful-micrometer-registry</artifactId>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>statful-micrometer-registry</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git@github.com:statful/statful-micrometer-registry.git</connection>
         <developerConnection>scm:git:git@github.com:statful/statful-micrometer-registry.git</developerConnection>
         <url>https://github.com/statful/statful-micrometer-registry.git</url>
-        <tag>statful-micrometer-registry-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
