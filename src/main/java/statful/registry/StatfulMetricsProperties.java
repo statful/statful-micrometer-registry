@@ -1,3 +1,5 @@
+package statful.registry;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.*;

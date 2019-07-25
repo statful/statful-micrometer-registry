@@ -1,3 +1,5 @@
+package statful.registry;
+
 import com.statful.client.domain.api.StatfulClient;
 import com.statful.client.domain.api.Tags;
 import io.micrometer.core.instrument.*;

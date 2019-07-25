@@ -1,3 +1,5 @@
+package statful.registry;
+
 import com.google.common.annotations.VisibleForTesting;
 import io.micrometer.core.instrument.step.StepRegistryConfig;
 import org.springframework.beans.factory.annotation.Value;
