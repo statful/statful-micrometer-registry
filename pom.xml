@@ -18,6 +18,13 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:git@github.com:statful/statful-micrometer-registry.git</connection>
+        <developerConnection>scm:git:git@github.com:statful/statful-micrometer-registry.git</developerConnection>
+        <url>https://github.com/statful/statful-micrometer-registry.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
