@@ -89,14 +89,14 @@ You can see the metrics output by running the client in dry-run mode, it will lo
 There are a few ways that you can customize your metrics by simply setting
 some application properties.
 
-#####Global metric prefix 
+##### Global metric prefix 
 This will set a prefix for all your metrics 
 
 ```
 statful.client.springboot.metrics.prefix=springboot
 ```
 
-#####Metric alias
+##### Metric alias
 This will replace every metric that contains the prefix with the chosen alias:
 
 ```
@@ -104,7 +104,7 @@ statful.metrics.properties.alias.system.cpu=cpu
 statful.metrics.properties.alias.jvm.memory=memory
 ```
 
-#####Metric tags
+##### Metric tags
 A list of tags to be added to the metrics that contain the prefix:
 
 ```
@@ -116,7 +116,7 @@ To add multiple tags use ';' as the separator:
 statful.metrics.properties.tags.jvm.memory=unit=Gb;environment=prod
 ```
 
-#####Metrics allowed
+##### Metrics allowed
 
 It's possible to only collect certain metrics that contain a prefix:
 
