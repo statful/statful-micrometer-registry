@@ -1,6 +1,6 @@
 package statful.registry;
 
-import com.statful.client.core.StatfulFactory;
+import com.statful.client.core.http.StatfulFactory;
 import com.statful.client.domain.api.SenderAPI;
 import com.statful.client.domain.api.SenderFacade;
 import com.statful.client.domain.api.StatfulClient;
@@ -16,7 +16,6 @@ import org.springframework.util.Assert;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
