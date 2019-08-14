@@ -5,7 +5,6 @@
     <groupId>com.statful.client.framework</groupId>
     <artifactId>statful-micrometer-registry</artifactId>
     <version>1.0.2-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <name>statful-micrometer-registry</name>
     <description>Statful registry configuration for Micrometer.</description>
