@@ -17,6 +17,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Francisco Mota</name>
+            <email>francisco.mota@mindera.com</email>
+            <organization>Statful</organization>
+            <organizationUrl>http://www.statful.com</organizationUrl>
+        </developer>
+    </developers>
+
     <scm>
         <connection>scm:git:git@github.com:statful/statful-micrometer-registry.git</connection>
         <developerConnection>scm:git:git@github.com:statful/statful-micrometer-registry.git</developerConnection>
