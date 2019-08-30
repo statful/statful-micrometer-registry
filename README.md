@@ -116,21 +116,35 @@ To add multiple tags use ';' as the separator:
 statful.metrics.properties.tags.jvm.memory=unit=Gb;environment=prod
 ```
 
-##### Metrics allowed
+##### Filter Metrics
 
-It's possible to only collect certain metrics that contain a prefix:
+Using Spring Boot's [Per-meter properties](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#_per_meter_properties)  it's possible to filter out certain metrics:
 
+###### application.yml
 ```
-statful.metrics.properties.acceptedMetrics=jvm
+management: 
+  metrics:
+    enable:
+      cpu: false
+      memory: false
+      jvm: true
+      logback: false
+      http: true
+      process: false
 ```
-
-This would only allow metrics that contain `jvm` as a prefix. By default every metric collected by the actuator is allowed.
-
+###### application.properties
+```
+management.metrics.enable.cpu=false
+management.metrics.enable.memory=false
+management.metrics.enable.jvm=true
+management.metrics.enable.logback=false
+management.metrics.enable.http=true
+management.metrics.enable.proccess=false
+```
 
 With the configuration:
 
 ```
-statful.metrics.properties.acceptedMetrics=jvm
 statful.metrics.properties.alias.jvm.memory=memory
 statful.metrics.properties.tags.jvm.memory=environment=prod
 ```
