@@ -86,45 +86,6 @@ public class StatfulMetricRegistryTest {
     }
 
     @Test
-    public void shouldAllowMetricsThatMatchNameRestrictions() {
-        statfulClient = StatfulFactory.buildHTTPClient().with().isDryRun(true).build();
-
-        statfulMetricsProperties = new StatfulMetricsProperties();
-        statfulMetricRegistryConfig = new StatfulMetricRegistryConfig();
-
-        statfulMetricsProperties.setAcceptedMetrics(Collections.singletonList("metric"));
-        statfulMetricRegistryConfig.setStep(10);
-
-        statfulMetricRegistry = new StatfulMetricRegistry(statfulMetricRegistryConfig, statfulClient, clock, statfulMetricsProperties);
-
-        statfulMetricRegistry.counter(METRIC_NAME, TAG_KEY, TAG_VALUE);
-
-        List<Meter> meters = statfulMetricRegistry.getMeters();
-
-        assertFalse(meters.isEmpty());
-        assertEquals(1, meters.size());
-    }
-
-    @Test
-    public void shouldNotAllowMetricsThatDoNotMatchNameRestrictions() {
-        statfulClient = StatfulFactory.buildHTTPClient().with().isDryRun(true).build();
-
-        statfulMetricsProperties = new StatfulMetricsProperties();
-        statfulMetricRegistryConfig = new StatfulMetricRegistryConfig();
-
-        statfulMetricsProperties.setAcceptedMetrics(Collections.singletonList("invalid"));
-        statfulMetricRegistryConfig.setStep(10);
-
-        statfulMetricRegistry = new StatfulMetricRegistry(statfulMetricRegistryConfig, statfulClient, clock, statfulMetricsProperties);
-
-        statfulMetricRegistry.counter(METRIC_NAME, TAG_KEY, TAG_VALUE);
-
-        List<Meter> meters = statfulMetricRegistry.getMeters();
-
-        assertTrue(meters.isEmpty());
-    }
-
-    @Test
     public void shouldReplaceNameOfMetricsThatMatchPrefix() {
         statfulClient = StatfulFactory.buildHTTPClient().with().isDryRun(true).build();
 
