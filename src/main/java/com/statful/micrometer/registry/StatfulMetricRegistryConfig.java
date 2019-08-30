@@ -18,7 +18,7 @@ public class StatfulMetricRegistryConfig implements StepRegistryConfig {
     private String prefix;
     @Value("${statful.springboot.metrics.step:10}")
     private int step;
-    @Value("${statful.springboot.metrics.enabled:false}")
+    @Value("${statful.springboot.metrics.enabled:true}")
     private boolean enabled;
     @Value("${statful.springboot.metrics.numThreads:0}")
     private int numThreads;
