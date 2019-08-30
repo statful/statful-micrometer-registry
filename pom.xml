@@ -4,7 +4,7 @@
 
     <groupId>com.statful.client.framework</groupId>
     <artifactId>statful-micrometer-registry</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <name>statful-micrometer-registry</name>
     <description>Statful registry configuration for Micrometer.</description>
@@ -30,7 +30,7 @@
         <connection>scm:git:git@github.com:statful/statful-micrometer-registry.git</connection>
         <developerConnection>scm:git:git@github.com:statful/statful-micrometer-registry.git</developerConnection>
         <url>https://github.com/statful/statful-micrometer-registry.git</url>
-        <tag>statful-micrometer-registry-1.0.4</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
