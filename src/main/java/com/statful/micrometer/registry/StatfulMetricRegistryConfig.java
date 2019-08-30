@@ -1,4 +1,4 @@
-package statful.registry;
+package com.statful.micrometer.registry;
 
 import com.google.common.annotations.VisibleForTesting;
 import io.micrometer.core.instrument.step.StepRegistryConfig;

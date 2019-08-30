@@ -1,4 +1,4 @@
-package statful.registry;
+package com.statful.micrometer.registry;
 
 import com.statful.client.core.http.StatfulFactory;
 import com.statful.client.domain.api.SenderAPI;

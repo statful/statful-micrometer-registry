@@ -1,4 +1,4 @@
-package statful.registry;
+package com.statful.micrometer.registry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -26,12 +26,6 @@ public class StatfulMetricsProperties {
     private Map<String, String> tags = new HashMap<>();
 
     /**
-     * List of prefixes that will match against the metrics. If this is empty all metrics will be accepted. If it contains any string then
-     * only metrics that match will be accepted.
-     */
-    private List<String> acceptedMetrics = new ArrayList<>();
-
-    /**
      * The map getters return a map sorted so the shorter prefixes (more global) are checked last
      */
 
@@ -43,19 +37,11 @@ public class StatfulMetricsProperties {
         return new TreeMap<>(tags).descendingMap();
     }
 
-    public List<String> getAcceptedMetrics() {
-        return acceptedMetrics;
-    }
-
     public void setAlias(Map<String, String> alias) {
         this.alias = alias;
     }
 
     public void setTags(Map<String, String> tags) {
         this.tags = tags;
-    }
-
-    public void setAcceptedMetrics(List<String> acceptedMetrics) {
-        this.acceptedMetrics = acceptedMetrics;
     }
 }

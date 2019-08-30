@@ -1,4 +1,4 @@
-package statful.registry;
+package com.statful.micrometer.registry;
 
 import com.statful.client.domain.api.StatfulClient;
 import com.statful.client.domain.api.Tags;
@@ -60,14 +60,7 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
      */
     private void applyCustomFilter() {
         this.config()
-                .meterFilter(acceptedMetricsFilter())
                 .meterFilter(mapMetricToAliasAndTagsFilter());
-    }
-
-    private MeterFilter acceptedMetricsFilter() {
-        return MeterFilter.denyUnless(id ->
-                properties.getAcceptedMetrics().isEmpty() || properties.getAcceptedMetrics().stream()
-                        .anyMatch(metricName -> id.getName().startsWith(metricName) || isNotEmpty(getAliasForMetric(id))));
     }
 
     private MeterFilter mapMetricToAliasAndTagsFilter() {
@@ -147,7 +140,6 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
         Meter.Id meterId = counter.getId();
 
         com.statful.client.domain.api.Tags tags = new com.statful.client.domain.api.Tags();
-
         meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue()));
 
         this.statfulClient.counter(meterId.getName(), Double.valueOf(counter.count()).intValue()).with().tags(tags).send();
