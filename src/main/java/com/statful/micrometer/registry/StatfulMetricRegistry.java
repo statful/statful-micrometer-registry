@@ -1,10 +1,13 @@
 package com.statful.micrometer.registry;
 
+import com.statful.client.domain.api.Aggregation;
+import com.statful.client.domain.api.AggregationFrequency;
 import com.statful.client.domain.api.StatfulClient;
 import com.statful.client.domain.api.Tags;
 import io.micrometer.core.instrument.*;
 import io.micrometer.core.instrument.config.MeterFilter;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
+import io.micrometer.core.instrument.distribution.ValueAtPercentile;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
 import io.micrometer.core.instrument.step.StepRegistryConfig;
 import org.apache.logging.log4j.util.Strings;
@@ -131,7 +134,7 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
         Meter.Id meterId = counter.getId();
 
         com.statful.client.domain.api.Tags tags = new com.statful.client.domain.api.Tags();
-        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue()));
+        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue().replace(" ", "_")));
 
         this.statfulClient.counter(meterId.getName(), Double.valueOf(counter.count()).intValue()).with().tags(tags).send();
     }
@@ -140,7 +143,7 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
         Meter.Id meterId = counter.getId();
 
         com.statful.client.domain.api.Tags tags = new com.statful.client.domain.api.Tags();
-        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue()));
+        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue().replace(" ", "_")));
 
         this.statfulClient.counter(meterId.getName(), Double.valueOf(counter.count()).intValue()).with().tags(tags).send();
     }
@@ -149,7 +152,7 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
         Meter.Id meterId = gauge.getId();
         com.statful.client.domain.api.Tags tags = new com.statful.client.domain.api.Tags();
 
-        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue()));
+        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue().replace(" ", "_")));
 
         this.statfulClient.gauge(meterId.getName(), gauge.value()).with().tags(tags).send();
     }
@@ -159,11 +162,25 @@ public class StatfulMetricRegistry extends StepMeterRegistry {
         Meter.Id meterId = timer.getId();
         com.statful.client.domain.api.Tags tags = new Tags();
 
-        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue()));
+        meterId.getTags().forEach((tag) -> tags.putTag(tag.getKey(), tag.getValue().replace(" ", "_")));
+        for (ValueAtPercentile pValue :histogramSnapshot.percentileValues()) {
+            switch (Double.valueOf(pValue.percentile()*100).intValue()) {
+                case 90:
+                    statfulClient.aggregatedTimer(meterId.getName(), Double.valueOf(pValue.value()).longValue(), Aggregation.P90, AggregationFrequency.FREQ_10).with().tags(tags).send();
+                    break;
+                case 95:
+                    statfulClient.aggregatedTimer(meterId.getName(), Double.valueOf(pValue.value()).longValue(), Aggregation.P95, AggregationFrequency.FREQ_10).with().tags(tags).send();
+                    break;
+                case 99:
+                    statfulClient.aggregatedTimer(meterId.getName(), Double.valueOf(pValue.value()).longValue(), Aggregation.P99, AggregationFrequency.FREQ_10).with().tags(tags).send();
+                    break;
+            }
+        };
 
-        long value = Double.valueOf(histogramSnapshot.mean(this.getBaseTimeUnit())).longValue();
+        statfulClient.aggregatedTimer(meterId.getName(), timer.count(), Aggregation.COUNT, AggregationFrequency.FREQ_10).with().tags(tags).send();
+        statfulClient.aggregatedTimer(meterId.getName(), Double.valueOf(timer.mean(this.getBaseTimeUnit())).longValue(), Aggregation.AVG, AggregationFrequency.FREQ_10).with().tags(tags).send();
+        statfulClient.aggregatedTimer(meterId.getName(), Double.valueOf(histogramSnapshot.max(this.getBaseTimeUnit())).longValue(), Aggregation.MAX, AggregationFrequency.FREQ_10).with().tags(tags).send();
 
-        this.statfulClient.timer(meterId.getName(), value).with().tags(tags).send();
     }
 
     @Override
