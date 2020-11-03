@@ -41,7 +41,7 @@
         <spring-boot-actuator.version>2.1.0.RELEASE</spring-boot-actuator.version>
         <spring-boot-configuration-processor.version>2.1.0.RELEASE</spring-boot-configuration-processor.version>
         <mockito.version>1.10.19</mockito.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <guava.version>24.1.1</guava.version>
     </properties>
 
